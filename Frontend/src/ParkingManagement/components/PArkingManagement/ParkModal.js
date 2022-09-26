@@ -11,12 +11,11 @@ function ParkModal({ park, closeModal, car, setCar }) {
       onSubmit={(e) => park(e)}
       className="fixed text-4xl inset-0 grid place-content-center z-50 text-black"
     >
-      <div className="border-2 relative rounded-lg p-4 pt-8 flex flex-col gap-4 items-center bg-blue-400">
+      <div className="border-2 relative rounded-lg p-4 pt-8 flex flex-col gap-4 items-center bg-blue-700">
         <RiCloseFill
           onClick={() => closeModal(false)}
-          className="absolute top-1 right-1 cursor-pointer"
-        />
-        <p>Enter Plate Number</p>
+          className="absolute top-1 right-1 cursor-pointer"/>
+        <p>Enter Number Plate</p>
         <input
           className="outline-none px-4 py-2 text-2xl"
           value={car?.plateNumber || ""}

@@ -1,7 +1,46 @@
 import React from "react";
 import useGlobalContext from "../../context/index";
-import { RiCloseFill } from "react-icons/ri";
+import { RiCloseFill, RiRoundedCorner } from "react-icons/ri";
 import { BiExit } from "react-icons/bi";
+import styled from "styled-components";
+import { useState } from "react";
+
+const Tab = styled.button`
+  padding: 10px 30px;
+  cursor: pointer;
+  opacity: 0.6;
+  background: white;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid transparent;
+  transition: ease border-bottom 250ms;
+  ${({ active }) =>
+    active &&
+    `
+    border-bottom: 2px solid black;
+    opacity: 1;
+  `}
+`;
+function TabGroup() {
+  const [active, setActive] = useState(types[0]);
+  return (
+    <>
+      <div>
+        {types.map((type) => (
+          <Tab
+            key={type}
+            active={active === type}
+            onClick={() => setActive(type)}
+          >
+            {type}
+          </Tab>
+        ))}
+      </div>
+    </>
+  );
+}
+
+const types = ["Cash", "Comp"];
 
 function ManageBar() {
   const { ForManaging, ParkingSlots, Exited, MockDate } = useGlobalContext();
@@ -18,20 +57,15 @@ function ManageBar() {
   ).toFixed(2);
 
   const price = {
-    Bike: 20,
-    Car: 60,
-    Van: 100,
+    Bike: localStorage.getItem('bikeVal') || 20,
+    Car: localStorage.getItem('carVal') || 60,
+    Van: localStorage.getItem('vanVal') || 100,
   };
 
   const getBill = (hours) => {
     if (hours >= 24) 
           return 5000;
-    if (hours <= 3 && !data.returner) 
-          return 40;
-    if (hours > 3 && !data.returner)
-      return 40 + (hours - 3) * price[data?.size];
-
-    return hours * price[data?.size];
+    return price[data?.size];
   };
 
   const handleExit = () => {
@@ -50,7 +84,7 @@ function ManageBar() {
         !forManaging.open && "translate-y-full z-50"
       } transform duration-500 fixed bottom-0 inset-x-0`}
     >
-      <div className="bg-blue-500 mx-auto min-w-max w-96  p-4 px-6 rounded-t-lg relative flex text-2xl justify-between items-end text-white">
+      <div className="bg-blue-500 mx-auto min-w-max w-96  p-4 px-6 rounded-t-lg relative flex text-2xl justify-between items-end">
         <RiCloseFill
           onClick={() => setForManaging({})}
           className="absolute right-1 top-1 cursor-pointer"
@@ -59,15 +93,17 @@ function ManageBar() {
           <p>plate: {data?.occupied}</p>
           <p>time: {hours} hr/s</p>
           <p>Total payment: {getBill(Math.ceil(hours))} LKR</p>
+        <div>
+      <TabGroup />
         </div>
-
+        
         <BiExit
           title="UNPARK"
           className="text-4xl cursor-pointer"
           onClick={() => handleExit()}
         />
       </div>
-    </div>
+    </div></div>
   );
 }
 

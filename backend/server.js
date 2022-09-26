@@ -12,9 +12,12 @@ app.use(bodyParser.json({ limit: "30 mb", extended: true })); //sometimes we mig
 app.use(bodyParser.urlencoded({ limit: "30 mb", extended: true }));
 
 //Add here the routers and paths
-
+const login = require("./routes/loginRoute");
+const usersRouter = require('./routes/ParkingFee');
+//const AttendRequestRouter = require("./routes/AttendRequestRoutes.js");
 
 //https://localhost:8070:customer will load CustomerRouter.js
+app.use('/park', usersRouter);
 
 
 //pricess.env.PORT will allow us to choose the available port that is availabe once hosted
@@ -38,3 +41,6 @@ connection.once("open", () => {
 app.listen(PORT, () => {
   console.log("Server is up and running on port : " + PORT);
 });
+
+//login 
+

@@ -168,7 +168,7 @@ export default function ParkingLot() {
             <GiGate
               title="ENTRANCE"
               onClick={() => (!editing ? handleParking(i) : null)}
-              className={`text-green-400 absolute ${
+              className={`text-blue-600 absolute ${
                 editing ? "cursor-move" : "cursor-pointer"
               }`}
             />
@@ -200,9 +200,9 @@ export default function ParkingLot() {
                   ? setForManaging({ open: true, content: slot })
                   : null
               }
-              className={`${slot.occupied && "bg-green-300 cursor-pointer"} ${
+              className={`${slot.occupied && "bg-blue-300 cursor-pointer"} ${
                 editing && "cursor-move"
-              }  h-12 w-12 border-2 grid place-content-center absolute text-2xl`}
+              }  h-12 w-12 border-2 grid place-content-center absolute text-3xl`}
             >
               {slot.size?.charAt(0).toUpperCase()}
             </div>

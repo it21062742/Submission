@@ -4,8 +4,8 @@ import Notification from "./ParkingManagement/components/PArkingManagement/Notif
 import ManageBar from "./ParkingManagement/components/PArkingManagement/ManageBar";
 import StatusBar from "./ParkingManagement/components/PArkingManagement/StatusBar";
 import ParkingLot from "./ParkingManagement/components/PArkingManagement/ParkingLot";
-import { MainNavigation } from "./ParkingManagement/components/nav/MainNavigation";
-
+import {MainNavigation} from "./ParkingManagement/components/nav/MainNavigation"
+import Parkfee from "./Admin/parkingFee/ParkingFee"
 
 import Login from "./Login/index";
 
@@ -22,7 +22,7 @@ function App() {
                 element={
                   <div className="App">
                     <Notification />
-                    <StatusBar />
+
                     <EditBar />
                     <ParkingLot />
                     <ManageBar />
@@ -33,7 +33,7 @@ function App() {
 
             <Routes>
               <Route
-                path="/Login"
+                path="/login"
                 element={
                   <>
                     <Login />
@@ -43,6 +43,19 @@ function App() {
               />
             </Routes>
           </div>
+
+          <Routes>
+              <Route
+                path="/admin"
+                element={
+                  <>
+                     <StatusBar />
+                     <Parkfee />
+
+                  </>
+                }
+              />
+            </Routes>
         </Router>
 
   );

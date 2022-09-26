@@ -17,7 +17,7 @@ function EditBar() {
     if (type)
       return setParkingSlots([
         ...parkingSlots,
-        { id: id(), defaultPosition: { x: 100, y: 100 }, size: type },
+        { id: id(), defaultPosition: { x: 100, y: 130 }, size: type },
       ]);
 
     return setEntrances([

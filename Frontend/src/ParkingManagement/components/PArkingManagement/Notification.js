@@ -14,7 +14,7 @@ function Notification() {
 
   return (
     <div
-      className={`fixed inset-x-0 text-white transform duration-500 text-center ${
+      className={`fixed inset-x-0 transform duration-500 text-center text-lg ${
         !notification?.message && "-translate-y-full"
       }`}
     >

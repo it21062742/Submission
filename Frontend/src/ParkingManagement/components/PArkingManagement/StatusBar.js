@@ -27,11 +27,7 @@ function StatusBar() {
       setExited((E) =>
         E.filter(
           (e) =>
-            Math.abs(
-              (mockDate ? new Date(mockDate) : new Date()) - new Date(e.exit)
-            ) /
-              36e5 <
-            1
+            Math.abs((mockDate ? new Date(mockDate) : new Date()) - new Date(e.exit)) / 365 < 1
         )
       );
     }
@@ -40,13 +36,13 @@ function StatusBar() {
   const parked = parkingSlots.filter((p) => p.occupied);
 
   return (
-    <div className="fixed right-0 top-0 p-4 grid gap-2">
+    <div className="fixed right-0 top-15 p-4 grid gap-2">
       <div className="flex justify-between">
-        <span>Real Time:</span>
+        <span>Time : </span>
         <span>{time}</span>
       </div>
       <div className="flex justify-between gap-4">
-        <span>Skip Time:</span>
+        <span>Pick a date :</span>
         <span>
           <input
             type="datetime-local"
@@ -57,14 +53,15 @@ function StatusBar() {
         </span>
       </div>
       <div className="text-right">
-        <div className="grid grid-cols-2 w-60 ml-auto bg-gray-700 border-2 border-black p-1 gap-1">
-          {["Parked", "Just Exited"].map((T) => (
+
+        <div className="grid grid-cols-2 w-60 ml-auto bg-blue-700 border-2 border-black p-1 gap-1">
+          {["Parked", "Exited"].map((T) => (
             <span
               key={T}
               onClick={() => setTab(T)}
               className={`${
-                tab === T && "bg-gray-300 text-black"
-              } hover:bg-gray-300 hover:text-black cursor-pointer text-center`}
+                tab === T && "bg-blue-400 text-black"
+              } hover:bg-blue-300 hover:text-black cursor-pointer text-center`}
             >
               {T}
             </span>
