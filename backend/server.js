@@ -12,17 +12,17 @@ app.use(bodyParser.json({ limit: "30 mb", extended: true })); //sometimes we mig
 app.use(bodyParser.urlencoded({ limit: "30 mb", extended: true }));
 
 //Add here the routers and paths
-const login = require("./routes/loginRoute");
-const usersRouter = require('./routes/ParkingFee');
-//const AttendRequestRouter = require("./routes/AttendRequestRoutes.js");
+const ParkingFeeRouter = require("./routes/ParkingFeeRouter.js");
+const ParkingRouter = require("./routes/ParkingRouter.js");
+const ParkingStructureRouter = require("./routes/ParkingStructureRouter.js");
 
-//https://localhost:8070:customer will load CustomerRouter.js
-app.use('/park', usersRouter);
-
+//https://localhost:8080/Park
+app.use("/park/parkFee", ParkingFeeRouter);
+app.use("/park", ParkingRouter);
+app.use("/park/parkStruct", ParkingStructureRouter);
 
 //pricess.env.PORT will allow us to choose the available port that is availabe once hosted
 const PORT = process.env.PORT || 8080;
-
 const URL = process.env.MONGODB_URL;
 
 //To say the for mongoose about the db URL link (I think) here we also give options if we have any
@@ -41,6 +41,3 @@ connection.once("open", () => {
 app.listen(PORT, () => {
   console.log("Server is up and running on port : " + PORT);
 });
-
-//login 
-

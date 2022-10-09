@@ -1,4 +1,3 @@
-const router = require("express").Router();
 let ParkingStructure = require("../models/ParkingStructure");
 
 //To get All Transport Request

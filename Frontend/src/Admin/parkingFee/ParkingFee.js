@@ -1,49 +1,68 @@
 import React, { useState } from "react";
+import axios from "axios";
+import AllPark from "./getAllParkingFee";
 
 const Form = () => {
   const [bikeVal, setbikeFee] = useState("");
   const [carVal, setCarFee] = useState("");
   const [vanVal, setvanFee] = useState("");
 
-  function onChangeCar(e) {
-    setCarFee(e.target.value);
-  }
+  // feeId: { type: String, required: true },
+  // CarVal: {type: String },
+  // VanVal: {type: String },
+  // BikeVal: {type: String},
 
-  function onChangeVan(e) {
-    setvanFee(e.target.value);
-  }
+  const [parkingFee, setparkingFee] = useState({
+    feeId: "1",
+    CarVal: 0,
+    BikeVal: 0,
+    VanVal: 0,
+  });
 
-  function onChangeBike(e) {
-    setbikeFee(e.target.value);
+  var AllInfo = AllPark();
+
+  let j = AllInfo.length;
+  j--;
+
+  if (j >= 0) {
+    let reqId = parseInt(AllInfo[j].feeId);
+    reqId++;
+    console.log(reqId);
+    //console.log(j);
+    // console.log(j);
+
+    parkingFee.feeId = reqId;
   }
+  // function onChangeCar(e) {
+  //   setCarFee(e.target.value);
+  // }
+
+  // function onChangeVan(e) {
+  //   setvanFee(e.target.value);
+  // }
+
+  // function onChangeBike(e) {
+  //   setbikeFee(e.target.value);
+  // // }
 
   function onSubmit(e) {
     e.preventDefault();
-    localStorage.setItem("carVal", carVal);
-    localStorage.setItem("vanVal", vanVal);
-    localStorage.setItem("bikeVal", bikeVal);
+    window.location.reload(false);
+
+    // localStorage.setItem("carVal", carVal);
+    // localStorage.setItem("vanVal", vanVal);
+    // localStorage.setItem("bikeVal", bikeVal);
+
+    axios
+      .post("http://localhost:8080/park/parkFee", parkingFee)
+      .then(() => {
+        alert("Request Added Successfully");
+      })
+      .catch((err) => {
+        alert(err.message);
+        console.log(err);
+      });
   }
-
-  /*
-    -->Fee
-    CarVal
-    bikeVal
-    vanVal
-
-   --> parkling 
-    numberplateID 
-    Hrs 
-    type
-    Date
-    PayableAmount
-
-    --> porking location
-    id
-    x
-    y
-
-
-    */
 
   return (
     <form
@@ -61,8 +80,12 @@ const Form = () => {
               <input
                 type="number"
                 placeholder="enter new value"
-                value={bikeVal}
-                onChange={onChangeBike}
+                onChange={(e) => {
+                  setparkingFee({
+                    ...parkingFee,
+                    BikeVal: e.target.value,
+                  });
+                }}
               />
             </p>
             <br></br>
@@ -71,8 +94,12 @@ const Form = () => {
               <input
                 type="number"
                 placeholder="enter new value"
-                value={carVal}
-                onChange={onChangeCar}
+                onChange={(e) => {
+                  setparkingFee({
+                    ...parkingFee,
+                    CarVal: e.target.value,
+                  });
+                }}
               />
             </p>
             <br></br>
@@ -81,16 +108,18 @@ const Form = () => {
               <input
                 type="number"
                 placeholder="enter new value"
-                value={vanVal}
-                onChange={onChangeVan}
+                onChange={(e) => {
+                  setparkingFee({
+                    ...parkingFee,
+                    VanVal: e.target.value,
+                  });
+                }}
               />
             </p>
             <br></br>
           </div>
 
           <button
-            onClick={getData}
-            onSubmit={onSubmit}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded-full"
             type="submit"
           >

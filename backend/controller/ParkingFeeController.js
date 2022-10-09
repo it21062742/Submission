@@ -1,10 +1,9 @@
-const router = require("express").Router();
-let parkFee = require("../models/ParkingFee");
+let ParkFee = require("../models/ParkingFee");
 
 //To get All Transport Request
 const getRequests = async (req, res) => {
   try {
-    const allReqs = await TransportRequest.find(); //now this will find all students and save it in allStudents
+    const allReqs = await ParkFee.find(); //now this will find all students and save it in allStudents
 
     res.status(200).json(allReqs);
   } catch (error) {
@@ -16,7 +15,7 @@ const getRequests = async (req, res) => {
 //To create a new Transport Request
 const createRequest = async (req, res) => {
   const reqs = req.body;
-  const Request = new parkFee(reqs); // It is exported in routes so dont need to export it here
+  const Request = new ParkFee(reqs); // It is exported in routes so dont need to export it here
 
   try {
     await Request.save();
@@ -31,7 +30,7 @@ const createRequest = async (req, res) => {
 //   const id = req.params.id;
 
 //   try {
-//     await parkFee.findByIdAndDelete(id); //exec to make it a executable function
+//     await ParkFee.findByIdAndDelete(id); //exec to make it a executable function
 //     res.status(200).send("Successfully Deleted");
 //   } catch (error) {
 //     console.log(error.messsage);
@@ -43,7 +42,7 @@ const updateRequest = async (req, res) => {
   const id = req.params.id;
   const body = req.body;
   try {
-    await TransportRequest.findByIdAndUpdate(id, body);
+    await ParkFee.findByIdAndUpdate(id, body);
     res.status(200).send("Successfully Updated");
   } catch {
     (err) => {
@@ -56,7 +55,7 @@ const updateRequest = async (req, res) => {
 const getOneRequest = async (req, res) => {
   let id = req.params.id;
 
-  const request = await TransportRequest.findById(id)
+  const request = await ParkFee.findById(id)
     .then((reqs) => {
       let object = { status: "Fetched Request" };
       res.status(200).json(reqs);
