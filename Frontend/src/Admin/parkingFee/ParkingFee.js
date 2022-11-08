@@ -6,6 +6,7 @@ const Form = () => {
   const [vanVal, setvanFee] = useState("");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [parkingFee, setparkingFee] = useState({
     feeId: "1",
     CarVal: 0,
@@ -60,6 +61,27 @@ const Form = () => {
 >>>>>>> parent of 3ebdddea (DB connect)
   }
 
+=======
+  function onChangeCar(e) {
+    setCarFee(e.target.value);
+  }
+
+  function onChangeVan(e) {
+    setvanFee(e.target.value);
+  }
+
+  function onChangeBike(e) {
+    setbikeFee(e.target.value);
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    localStorage.setItem("carVal", carVal);
+    localStorage.setItem("vanVal", vanVal);
+    localStorage.setItem("bikeVal", bikeVal);
+  }
+
+>>>>>>> parent of 3ebdddea (DB connect)
   /*
     -->Fee
     CarVal
