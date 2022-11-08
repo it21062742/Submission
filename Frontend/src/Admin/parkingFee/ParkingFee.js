@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
-import AllPark from "./getAllParkingFee";
 
 const Form = () => {
   const [bikeVal, setbikeFee] = useState("");
   const [carVal, setCarFee] = useState("");
   const [vanVal, setvanFee] = useState("");
 
+<<<<<<< HEAD
   const [parkingFee, setparkingFee] = useState({
     feeId: "1",
     CarVal: 0,
@@ -40,7 +39,47 @@ const Form = () => {
         alert(err.message);
         console.log(err);
       });
+=======
+  function onChangeCar(e) {
+    setCarFee(e.target.value);
   }
+
+  function onChangeVan(e) {
+    setvanFee(e.target.value);
+  }
+
+  function onChangeBike(e) {
+    setbikeFee(e.target.value);
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    localStorage.setItem("carVal", carVal);
+    localStorage.setItem("vanVal", vanVal);
+    localStorage.setItem("bikeVal", bikeVal);
+>>>>>>> parent of 3ebdddea (DB connect)
+  }
+
+  /*
+    -->Fee
+    CarVal
+    bikeVal
+    vanVal
+
+   --> parkling 
+    numberplateID 
+    Hrs 
+    type
+    Date
+    PayableAmount
+
+    --> porking location
+    id
+    x
+    y
+
+
+    */
 
   return (
     <form
@@ -59,12 +98,8 @@ const Form = () => {
                 type="number"
                 required
                 placeholder="enter new value"
-                onChange={(e) => {
-                  setparkingFee({
-                    ...parkingFee,
-                    BikeVal: e.target.value,
-                  });
-                }}
+                value={bikeVal}
+                onChange={onChangeBike}
               />
             </p>
             <br></br>
@@ -74,12 +109,8 @@ const Form = () => {
                 type="number"
                 required
                 placeholder="enter new value"
-                onChange={(e) => {
-                  setparkingFee({
-                    ...parkingFee,
-                    CarVal: e.target.value,
-                  });
-                }}
+                value={carVal}
+                onChange={onChangeCar}
               />
             </p>
             <br></br>
@@ -89,18 +120,16 @@ const Form = () => {
                 type="number"
                 required
                 placeholder="enter new value"
-                onChange={(e) => {
-                  setparkingFee({
-                    ...parkingFee,
-                    VanVal: e.target.value,
-                  });
-                }}
+                value={vanVal}
+                onChange={onChangeVan}
               />
             </p>
             <br></br>
           </div>
 
           <button
+            onClick={getData}
+            onSubmit={onSubmit}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded-full"
             type="submit"
           >

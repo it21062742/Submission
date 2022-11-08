@@ -1,3 +1,4 @@
+const router = require("express").Router();
 let Parking = require("../models/Parking");
 
 //To get All Transport Request
@@ -15,7 +16,7 @@ const getRequests = async (req, res) => {
 //To create a new Transport Request
 const createRequest = async (req, res) => {
   const reqs = req.body;
-  const Request = new Parking(reqs); // It is exported in routes so dont need to export it here
+  const Request = new parkFee(reqs); // It is exported in routes so dont need to export it here
 
   try {
     await Request.save();
