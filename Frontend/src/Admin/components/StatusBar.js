@@ -1,4 +1,4 @@
-import useGlobalContext from "../../ParkingManagement/context/index";
+import useGlobalContext from "../../ParkingManagement/components/context/index";
 import React, { useEffect, useState } from "react";
 
 function StatusBar() {
