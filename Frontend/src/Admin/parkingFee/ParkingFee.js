@@ -7,11 +7,6 @@ const Form = () => {
   const [carVal, setCarFee] = useState("");
   const [vanVal, setvanFee] = useState("");
 
-  // feeId: { type: String, required: true },
-  // CarVal: {type: String },
-  // VanVal: {type: String },
-  // BikeVal: {type: String},
-
   const [parkingFee, setparkingFee] = useState({
     feeId: "1",
     CarVal: 0,
@@ -28,30 +23,13 @@ const Form = () => {
     let reqId = parseInt(AllInfo[j].feeId);
     reqId++;
     console.log(reqId);
-    //console.log(j);
-    // console.log(j);
 
     parkingFee.feeId = reqId;
   }
-  // function onChangeCar(e) {
-  //   setCarFee(e.target.value);
-  // }
-
-  // function onChangeVan(e) {
-  //   setvanFee(e.target.value);
-  // }
-
-  // function onChangeBike(e) {
-  //   setbikeFee(e.target.value);
-  // // }
 
   function onSubmit(e) {
     e.preventDefault();
     window.location.reload(false);
-
-    // localStorage.setItem("carVal", carVal);
-    // localStorage.setItem("vanVal", vanVal);
-    // localStorage.setItem("bikeVal", bikeVal);
 
     axios
       .post("http://localhost:8080/park/parkFee", parkingFee)
@@ -69,7 +47,7 @@ const Form = () => {
       onSubmit={onSubmit}
       className="fixed text-1x2  grid place-content-center text-black"
     >
-      <div className="border-2 relative rounded-lg p-2 pt-5 flex flex-col gap-5">
+      <div className="border-2 relative rounded-lg p-5 pt-10 flex flex-col gap-3">
         <h1>Update Parking fee</h1>
 
         <div>
@@ -79,6 +57,7 @@ const Form = () => {
               bike : &nbsp;
               <input
                 type="number"
+                required
                 placeholder="enter new value"
                 onChange={(e) => {
                   setparkingFee({
@@ -93,6 +72,7 @@ const Form = () => {
               car : &nbsp;
               <input
                 type="number"
+                required
                 placeholder="enter new value"
                 onChange={(e) => {
                   setparkingFee({
@@ -107,6 +87,7 @@ const Form = () => {
               van : &nbsp;
               <input
                 type="number"
+                required
                 placeholder="enter new value"
                 onChange={(e) => {
                   setparkingFee({

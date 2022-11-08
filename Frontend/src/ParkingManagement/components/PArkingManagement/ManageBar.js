@@ -21,6 +21,8 @@ const Tab = styled.button`
     opacity: 1;
   `}
 `;
+
+const types = ["Cash", "Comp"];
 function TabGroup() {
   const [active, setActive] = useState(types[0]);
   return (
@@ -40,8 +42,6 @@ function TabGroup() {
   );
 }
 
-const types = ["Cash", "Comp"];
-
 function ManageBar() {
   const { ForManaging, ParkingSlots, Exited, MockDate } = useGlobalContext();
   const [forManaging, setForManaging] = ForManaging;
@@ -57,14 +57,13 @@ function ManageBar() {
   ).toFixed(2);
 
   const price = {
-    Bike: localStorage.getItem('bikeVal') || 20,
-    Car: localStorage.getItem('carVal') || 60,
-    Van: localStorage.getItem('vanVal') || 100,
+    Bike: localStorage.getItem("bikeVal") || 20,
+    Car: localStorage.getItem("carVal") || 60,
+    Van: localStorage.getItem("vanVal") || 100,
   };
 
   const getBill = (hours) => {
-    if (hours >= 24) 
-          return 5000;
+    if (hours >= 24) return 5000;
     return price[data?.size];
   };
 
@@ -93,17 +92,18 @@ function ManageBar() {
           <p>plate: {data?.occupied}</p>
           <p>time: {hours} hr/s</p>
           <p>Total payment: {getBill(Math.ceil(hours))} LKR</p>
-        <div>
-      <TabGroup />
+          <div>
+            <TabGroup />
+          </div>
+
+          <BiExit
+            title="UNPARK"
+            className="text-4xl cursor-pointer"
+            onClick={() => handleExit()}
+          />
         </div>
-        
-        <BiExit
-          title="UNPARK"
-          className="text-4xl cursor-pointer"
-          onClick={() => handleExit()}
-        />
       </div>
-    </div></div>
+    </div>
   );
 }
 
